@@ -266,6 +266,7 @@ for threshold in thresholds:
         strand = line['strand']
         start = line['chromStart']
         end = line['chromEnd']
+        score = line['score']
         sequence = line['sequence']
         if identifier in records_by_threshold:
           # raise ValueError("Error: Duplicate identifier {}\n".format(identifier))
@@ -276,6 +277,7 @@ for threshold in thresholds:
             'start': start,
             'end': end,
             'name': name,
+            'score': score,
             'strand': strand,
             'blocks': {
               'count': 1,
