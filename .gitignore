@@ -1,0 +1,8 @@
+*.bed
+*.bed.gz
+*.bam
+*.bam.bai
+*.out
+*.err
+*~
+*.sam
