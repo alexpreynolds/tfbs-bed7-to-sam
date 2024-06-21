@@ -1,8 +1,9 @@
 SHELL=/bin/bash
 THRESHOLD=1e-5
 REMOTE_TFBS_BED_GZ=/net/seq/data2/projects/ctrader/data/TF/increased_threshold/moods_${THRESHOLD}/moods.combined.all.bed.gz
-LOCAL_TFBS_BED_GZ=${PWD}/moods.combined.all.${THRESHOLD}.bed.gz
-LOCAL_TFBS_BED=${PWD}/moods.combined.all.${THRESHOLD}.bed
+LOCAL_TFBS_PREFIX=${PWD}/moods.combined.all.${THRESHOLD}
+LOCAL_TFBS_BED_GZ=${LOCAL_TFBS_PREFIX}.bed.gz
+LOCAL_TFBS_BED=${LOCAL_TFBS_PREFIX}.bed
 S3_DEST_URL=s3://areynolds-us-west-2/cd3plus/052524/tfbs-bam/
 
 all:
@@ -18,9 +19,9 @@ convert:
 	${PWD}/convert_chroms.sh ${LOCAL_TFBS_BED} ${THRESHOLD}
 
 upload:
-#	aws s3 cp --dryrun . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_PREFIX}.chr*.HAP*.bam"
-#	aws s3 cp --dryrun . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_PREFIX}.chr*.HAP*.bam.bai"
+	aws s3 cp --dryrun . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_TFBS_PREFIX}.chr*.bam"
+	aws s3 cp --dryrun . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_TFBS_PREFIX}.chr*.bam.bai"
 
 upload-real:
-#	aws s3 cp . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_PREFIX}.chr*.HAP*.bam"
-#	aws s3 cp . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_PREFIX}.chr*.HAP*.bam.bai"
+	aws s3 cp . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_TFBS_PREFIX}.chr*.bam"
+	aws s3 cp . ${S3_DEST_URL} --recursive --exclude "*" --include "${LOCAL_TFBS_PREFIX}.chr*.bam.bai"
