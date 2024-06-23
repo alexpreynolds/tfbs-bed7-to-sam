@@ -213,8 +213,8 @@ with open(in_fn, 'r') as in_fh:
       bounds[threshold] = {}
     record = bounds[threshold]
     identifier = '{}_{}_{}_{}'.format(line['name'], line['chrom'], line['chromStart'], line['chromEnd'])
-    start = line['chromStart']
-    end = line['chromEnd']
+    start = int(line['chromStart'] + 1)
+    end = int(line['chromEnd'])
     if identifier not in record:
       record[identifier] = {
         'start': start,
@@ -264,8 +264,8 @@ for threshold in thresholds:
         name = line['name']
         identifier = '{}_{}_{}_{}'.format(line['name'], line['chrom'], line['chromStart'], line['chromEnd'])
         strand = line['strand']
-        start = line['chromStart']
-        end = line['chromEnd']
+        start = int(line['chromStart'] + 1)
+        end = int(line['chromEnd'])
         score = line['score']
         sequence = line['sequence']
         if identifier in records_by_threshold:
